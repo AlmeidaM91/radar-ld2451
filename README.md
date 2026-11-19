@@ -37,7 +37,7 @@ UART do radar: 115200 baud, 8N1.
 
 ## Interface Java
 
-Requisitos: JDK 17 ou superior e Maven.
+Requisitos: JDK 25 (LTS) ou superior e Maven.
 
 ```
 cd java-interface

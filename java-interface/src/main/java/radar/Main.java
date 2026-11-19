@@ -29,7 +29,8 @@ import java.util.function.Function;
 
 public class Main extends Application {
 
-    public record Target(int id, int x, int y, int velocity, int distance, int angle, int snr) {}
+    public record Target(int id, int x, int y, int velocity, int distance, int angle, int snr) {
+    }
 
     private static final int MAX_POINTS = 300;
 
@@ -49,15 +50,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        table.getColumns().addAll(
-            col("ID", Target::id),
-            col("X (m)", Target::x),
-            col("Y (m)", Target::y),
-            col("Velocidade", Target::velocity),
-            col("Distância", Target::distance),
-            col("Ângulo", Target::angle),
-            col("SNR", Target::snr)
-        );
+        table.getColumns().add(col("ID", Target::id));
+        table.getColumns().add(col("X (m)", Target::x));
+        table.getColumns().add(col("Y (m)", Target::y));
+        table.getColumns().add(col("Velocidade", Target::velocity));
+        table.getColumns().add(col("Distância", Target::distance));
+        table.getColumns().add(col("Ângulo", Target::angle));
+        table.getColumns().add(col("SNR", Target::snr));
 
         xAxis.setLabel("tempo (s)");
         yAxis.setLabel("velocidade");
@@ -98,7 +97,8 @@ public class Main extends Application {
     }
 
     private void connect() {
-        if (client != null) client.disconnect();
+        if (client != null)
+            client.disconnect();
         client = new RadarClient(hostField.getText().trim());
         client.setOnMessage(msg -> Platform.runLater(() -> handle(msg)));
         client.setOnStatus(s -> Platform.runLater(() -> status.setText(s)));
@@ -106,7 +106,8 @@ public class Main extends Application {
     }
 
     private void withClient(Consumer<RadarClient> action) {
-        if (client != null) action.accept(client);
+        if (client != null)
+            action.accept(client);
     }
 
     private void handle(JsonNode msg) {
@@ -124,7 +125,8 @@ public class Main extends Application {
                 }
             }
             rows.setAll(list);
-            if (fastest != null) addSpeedPoint(fastest.velocity());
+            if (fastest != null)
+                addSpeedPoint(fastest.velocity());
 
         } else if (msg.has("ack")) {
             boolean ok = msg.path("ok").asBoolean();

@@ -7,8 +7,8 @@
 
 using namespace esphome::ld245x;
 
-const char* WIFI_SSID = "SUA_REDE";
-const char* WIFI_PASS = "SUA_SENHA";
+const char* WIFI_SSID = "LT - Bancada TI ";
+const char* WIFI_PASS = "laser2026";
 const int RADAR_RX = 16;
 const int RADAR_TX = 17;
 const unsigned long CONFIG_TIMEOUT_MS = 30000;
